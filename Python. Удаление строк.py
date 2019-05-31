@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 '''
 Полезно для написания карверов
 Циклично удаляет в файле каждую вторую строку до тех пор, пока не получим желаемое количество строк.
@@ -8,7 +10,7 @@
 '''
 
 start_file = input('Enter your too looooooooooooong file: ') 
-number_of_lines_in_result = input('How many lines do you want? Press ENTER to leave default = 4000 lines')
+number_of_lines_in_result = input('How many lines do you want? Press ENTER to leave default = 4000 lines ')
 
 if number_of_lines_in_result == '':
     number_of_lines_in_result = 4000
@@ -18,7 +20,7 @@ else:
 result = input('Enter result file: ')
 print()
 
-with open (start_file, encoding='cp1251') as f:
+with open (start_file, encoding='utf-8') as f:
     sub_list = f.readlines()
 
 i = 0

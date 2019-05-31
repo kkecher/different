@@ -24,7 +24,6 @@ i = 1
 for city in city_list:
     print ('Doing ' + str(i) + ' of ' + str(len(city_list)) + '. ' + city)
     try:
-        city = urllib.parse.quote(city)
         url = 'https://ru.wikipedia.org/wiki/' + city
         source_page_for_page_total = urllib.request.urlopen(url)
         for line in source_page_for_page_total:

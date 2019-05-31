@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 '''
 Эта программа объединяет ключевики из двух файлов (берет строку из одного файла и прописывает ее к каждой строке второго)
 Вход: 2 файла с ключевиками
@@ -12,11 +14,11 @@ print()
 print('Results will be written in file «' + str(result) + '»')
 print()
 
-with open(key_file1) as f:
+with open(key_file1, encoding='utf-8') as f:
     key_list1 = f.readlines()
     len_key_list1 = len(key_list1)
 
-with open(key_file2) as f:
+with open(key_file2, encoding='utf-8') as f:
     key_list2 = f.readlines()
     len_key_list2 = len(key_list2)
 

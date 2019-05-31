@@ -21,4 +21,3 @@ text_sorted_dict = sorted(text_dict.items(), key=operator.itemgetter(1), reverse
 with open(result, 'w') as f:
     for text_tuple in text_sorted_dict:
             f.write(str(text_tuple[1]) + ' - ' + str(text_tuple[0]) + '\n')
-
