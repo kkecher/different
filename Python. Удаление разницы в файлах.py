@@ -5,14 +5,14 @@
 '''
 text1 = input('Enter your first dirty file, old bastard: ')
 text2 = input('Ahhh, ok, give me your second file, silly faggot: ')
-mode = input('Where are you want to delete rows? Enter 1 or 2: ')
+mode = input('Where do you want to delete rows? Enter 1 or 2: ')
 result = input('Enter result file: ')
 
 
-with open(text1, 'r') as f:
+with open(text1, 'r', encoding='utf-8') as f:
     text1_list = f.readlines()
 
-with open(text2, 'r') as f:
+with open(text2, 'r', encoding='utf-8') as f:
     text2_list = f.readlines()
 
 text1_list = sorted(set(text1_list))
