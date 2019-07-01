@@ -16,7 +16,8 @@ start_time = timeit.default_timer()
 
 #загружаем список заголовков
 subjects_file = input('Enter file with subjects: ')
-with open(subjects_file, 'r', encoding='utf-8') as f:
+#with open(subjects_file, 'r', encoding='utf-8') as f:
+with open(subjects_file, 'r', encoding='cp1251') as f:
     subjects_list = f.read().splitlines()
 
 #обозначаем файл с результатами
@@ -110,7 +111,7 @@ for subject in subjects_list:
     normalized_subject = re.sub('^ | $', '', normalized_subject, flags=re.IGNORECASE)
 
     is_match_dir_id = False
-    print('Doing ' + str(subject_iter) + ' of ' + str(len_subjects_list) + ' subjects')
+    print(f'Doing {subject_iter} of {len_subjects_list} subjects')
     for dir_id in regex_dict:
         if is_match_regex_compiled(normalized_subject, dir_id):
             is_match_dir_id = True #если заголовок распознался регулярками раздела, то НЕ добавляем его потом в список «Нет соответствий»
@@ -127,49 +128,49 @@ with open(result_file, 'w') as f:
     for dir_id, subject_regex_iter_dict in subjects_filtered_by_dirs_dict.items():
         if dir_id in id_and_name_of_dirs_dict: #если id раздела есть в списке id-название, то получаем название раздела
             dir_name = id_and_name_of_dirs_dict[dir_id]
-            f.write(str(dir_name) + ' (' + str(dir_id) + ')' + '\n')
+            f.write(f'{dir_name} ({dir_id})\n')
         elif dir_id != 'НЕТ СООТВЕТСТВИЙ': #если id нет в списке id-название и id НЕ равен «Нет соответствия», то пишем в файл предупреждение
-            f.write('АХТУНГ! - НЕТ НАЗВАНИЯ РАЗДЕЛА' + ' (' + str(dir_id) + ')' + '\n')
+            f.write('АХТУНГ! - НЕТ НАЗВАНИЯ РАЗДЕЛА ({dir_id})\n')
         else:
-            f.write(dir_id + '\n') #dir_id = НЕТ СООТВЕТСТВИЯ
-        f.write('#'*50 + '\n')
+            f.write(f'{dir_id}\n') #dir_id = НЕТ СООТВЕТСТВИЯ
+        f.write(f'{"#"*50}\n')
         for subject, regex_iter_list in subject_regex_iter_dict.items():
-            f.write(str(subject) + ' ### ')
+            f.write(f'{subject} ### ')
             is_first_regex_iter = True
             for regex_iter in regex_iter_list:
                 if is_first_regex_iter:
-                    f.write(str(regex_iter))
+                    f.write(f'{regex_iter}')
                     is_first_regex_iter = False
                 else:
-                    f.write(', ' + str(regex_iter))
+                    f.write(f', {regex_iter}')
             f.write(' - numbers of regex lines')
             f.write('\n')
         f.write('\n'*2)
     f.write('\n'*5)
 
     #записываем заголовки, которые соответствуют более, чем одному id
-    f.write('ЗАГОЛОВКИ СООТВЕТСТВУЮТ БОЛЕЕ, ЧЕМ ОДНОМУ ID' + '\n')
+    f.write('ЗАГОЛОВКИ СООТВЕТСТВУЮТ БОЛЕЕ, ЧЕМ ОДНОМУ ID\n')
     f.write('#'*50 + '\n')
     for subject, dir_id_list in subjects_match_more_than_1_id_dict.items():
             dir_id_set = set(dir_id_list) #оставляем уникальные id разделов
             if len(dir_id_set) > 1:
                 is_first_dir_id = True #при первом dir_id НЕ дописываем запятую перед названием раздела, чтобы не получить «##### ,»
-                f.write(str(subject) + ' ##### ')
+                f.write(f'{subject} ##### ')
                 for dir_id in dir_id_set:
                     dir_name = id_and_name_of_dirs_dict[dir_id]
                     if is_first_dir_id:
-                        f.write(str(dir_name) + ' (' + str(dir_id) + ')')
+                        f.write(f'{dir_name} ({dir_id})')
                         is_first_dir_id = False
                     else:
-                        f.write(', ' + str(dir_name) + ' (' + str(dir_id) + ')')
+                        f.write(', {dir_name} ({dir_id})')
                 f.write('\n')
 
 stop_time = timeit.default_timer()
 program_time = stop_time-start_time
 program_time_hour = int(program_time // 3600)
 program_time_min = int((program_time - program_time_hour*3600) // 60)
-program_time_sec = int(program_time - program_time_min*60)
+program_time_sec = int(program_time - program_time_min*60 - program_time_hour*3600)
 
 print()
-print('I\'ve finished your dirty wish.')
-print('It took ' + str(program_time_hour) + ':' + str(program_time_min) + ':' + str(program_time_sec) + ' of my life, silly bastard.')
+print('I have finished your dirty wish.')
+print(f'It took {program_time_hour}:{program_time_min}:{program_time_sec} of my life, silly bastard.')
