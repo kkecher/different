@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
+
 '''
 Удаляет diff между файлами в одном из файлов.
 Вход: два файла; выбор, в каком из файлов удаляем строки
 Выход: файл с удаленными диффами
 '''
+
 text1 = input('Enter your first dirty file, old bastard: ')
 text2 = input('Ahhh, ok, give me your second file, silly faggot: ')
 mode = input('Where do you want to delete rows? Enter 1 or 2: ')

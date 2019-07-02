@@ -16,13 +16,15 @@ start_time = timeit.default_timer()
 
 #загружаем список заголовков
 subjects_file = input('Enter file with subjects: ')
-#with open(subjects_file, 'r', encoding='utf-8') as f:
-with open(subjects_file, 'r', encoding='cp1251') as f:
-    subjects_list = f.read().splitlines()
+try:
+    with open(subjects_file, 'r', encoding='utf-8') as f:
+        subjects_list = f.read().splitlines()
+except:
+    with open(subjects_file, 'r', encoding='cp1251') as f:
+        subjects_list = f.read().splitlines()
 
 #обозначаем файл с результатами
-#result_file = input('Enter result file: ')
-result_file = 'res'
+result_file = input('Enter result file: ')
 
 #загружаем список соответствий id раздела - название раздела, чтобы в итоге выводить названия разделов, а не только id
 #id_and_name_of_dirs_file = input('Enter file with id-name of dirs: ')
@@ -162,7 +164,7 @@ with open(result_file, 'w') as f:
                         f.write(f'{dir_name} ({dir_id})')
                         is_first_dir_id = False
                     else:
-                        f.write(', {dir_name} ({dir_id})')
+                        f.write(f', {dir_name} ({dir_id})')
                 f.write('\n')
 
 stop_time = timeit.default_timer()

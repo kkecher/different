@@ -20,12 +20,16 @@ else:
 result = input('Enter result file: ')
 print()
 
-with open (start_file, encoding='utf-8') as f:
-    sub_list = f.readlines()
+try:
+    with open (start_file, encoding='utf-8') as f:
+        sub_list = f.readlines()
+except:
+    with open (start_file, encoding='cp1251') as f:
+        sub_list = f.readlines()
 
 i = 0
 while True:
-    print('There are ' + str(len(sub_list)) + ' lines in file.')
+    print(f'There are {len(sub_list)} lines in file.')
     if len(sub_list)/2 < number_of_lines_in_result:
         break
     del sub_list[::2]
@@ -35,5 +39,5 @@ with open(result, 'w') as f:
     for line in sub_list:
         f.write(line)
 print()
-print('We repeat ' + str(i) + ' times.')
-print('There are ' + str(len(sub_list)) + ' lines in file.')
+print(f'We repeat {i} times.')
+print(f'There are {len(sub_list)} lines in file.')
