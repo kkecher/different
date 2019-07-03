@@ -24,7 +24,8 @@ except:
         subjects_list = f.read().splitlines()
 
 #обозначаем файл с результатами
-result_file = input('Enter result file: ')
+#result_file = input('Enter result file: ')
+result_file = 'res_транс_ukl.txt'
 
 #загружаем список соответствий id раздела - название раздела, чтобы в итоге выводить названия разделов, а не только id
 #id_and_name_of_dirs_file = input('Enter file with id-name of dirs: ')
